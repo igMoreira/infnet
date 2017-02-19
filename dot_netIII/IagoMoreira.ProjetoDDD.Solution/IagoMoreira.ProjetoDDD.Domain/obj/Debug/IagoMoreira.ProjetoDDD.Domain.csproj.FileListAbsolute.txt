@@ -1,0 +1,5 @@
+F:\Git\ProjetoDDD\IagoMoreira.ProjetoDDD.Solution\IagoMoreira.ProjetoDDD.Domain\bin\Debug\IagoMoreira.ProjetoDDD.Domain.dll
+F:\Git\ProjetoDDD\IagoMoreira.ProjetoDDD.Solution\IagoMoreira.ProjetoDDD.Domain\bin\Debug\IagoMoreira.ProjetoDDD.Domain.pdb
+F:\Git\ProjetoDDD\IagoMoreira.ProjetoDDD.Solution\IagoMoreira.ProjetoDDD.Domain\obj\Debug\IagoMoreira.ProjetoDDD.Domain.csprojResolveAssemblyReference.cache
+F:\Git\ProjetoDDD\IagoMoreira.ProjetoDDD.Solution\IagoMoreira.ProjetoDDD.Domain\obj\Debug\IagoMoreira.ProjetoDDD.Domain.dll
+F:\Git\ProjetoDDD\IagoMoreira.ProjetoDDD.Solution\IagoMoreira.ProjetoDDD.Domain\obj\Debug\IagoMoreira.ProjetoDDD.Domain.pdb

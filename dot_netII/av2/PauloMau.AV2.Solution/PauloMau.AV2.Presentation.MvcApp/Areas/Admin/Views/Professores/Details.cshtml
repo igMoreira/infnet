@@ -1,0 +1,111 @@
+﻿@model PauloMau.AV2.Domain.Entities.Professor
+
+@{
+    ViewBag.Title = "Detalhes de Professor";
+}
+
+<h2>Detalhes de Professor</h2>
+
+<div>
+    <h4>Professor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Matricula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Matricula)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CPF)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CPF)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nascimento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nascimento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cadastro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cadastro)
+        </dd>
+
+    </dl>
+    <h4>Endereço</h4>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Endereco.Rua)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Endereco.Rua)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Endereco.TipoLogradouro)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Endereco.TipoLogradouro)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Endereco.Numero)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Endereco.Numero)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Endereco.Complemento)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Endereco.Complemento)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Endereco.Cidade)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Endereco.Cidade)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Endereco.Estado)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Endereco.Estado)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Endereco.CEP)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Endereco.CEP)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProfessorId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

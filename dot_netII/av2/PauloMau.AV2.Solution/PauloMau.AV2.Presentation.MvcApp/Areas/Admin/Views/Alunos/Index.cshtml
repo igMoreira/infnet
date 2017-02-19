@@ -1,0 +1,88 @@
+﻿@model PagedList.IPagedList<PauloMau.AV2.Domain.Entities.Aluno>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Gerenciamento de Alunos";
+}
+    <p>
+        <h2>
+            Gerenciamento de Alunos
+        </h2>
+        <ul>
+            <li>
+                @Html.ActionLink("Cadastrar novo aluno", "Create")
+            </li>
+        </ul>
+    </p>
+    @using (Html.BeginForm("Index", "Alunos", FormMethod.Get))
+    {
+        <p>
+            <b>Buscar aluno:</b> @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+            <input type="submit" value="Buscar" />
+        </p>
+    }
+    <table class="table">
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Matricula)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().CPF)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Nascimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Cadastro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Mae)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Matricula)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CPF)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nascimento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cadastro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mae)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.AlunoId }) |
+                @Html.ActionLink("Details", "Details", new { id=item.AlunoId }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.AlunoId })
+            </td>
+        </tr>
+    }
+    
+    </table>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, currentFilter = ViewBag.CurrentFilter }))

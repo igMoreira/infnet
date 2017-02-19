@@ -1,0 +1,50 @@
+﻿@model PauloMau.AV2.Domain.Entities.Programa
+
+@{
+    ViewBag.Title = "Detahes do Programa";
+}
+
+<h2>Detalhes do Programa</h2>
+
+<div>
+    <h4>Programa</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cursos)
+        </dt>
+
+        @if (Model.Cursos != null)
+        {
+            foreach (var item in Model.Cursos)
+            {
+                <dd>@item.Nome</dd>
+            }
+        }
+        else
+        {
+            @:Este programa não está relacionado a um curso.
+        }
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProgramaId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

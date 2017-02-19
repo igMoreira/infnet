@@ -1,0 +1,65 @@
+﻿@model PagedList.IPagedList<PauloMau.AV2.Domain.Entities.Curso>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Gerenciamento de Cursos";
+}
+
+<h2>Gerenciamento de Cursos</h2>
+
+<p>
+    @Html.ActionLink("Cadastrar novo curso", "Create")
+</p>
+
+@using (Html.BeginForm("Index", "Cursos", FormMethod.Get))
+{
+    <p>
+        <b>Buscar curso:</b> @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Buscar" />
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Codigo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Objetivos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Descricao)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Codigo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Objetivos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descricao)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CursoId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CursoId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CursoId })
+        </td>
+    </tr>
+}
+
+</table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, currentFilter = ViewBag.CurrentFilter }))
