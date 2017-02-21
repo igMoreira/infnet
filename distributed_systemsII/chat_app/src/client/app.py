@@ -1,11 +1,11 @@
-import manager
+from message_handler import MessageHandler
 import presentation as ui
 
 host = 'localhost'
 port = 8080
 
-__CLIENT_MANAGER = manager.ClientManager(host, port)
-print(__CLIENT_MANAGER.make_request("Iago was here"))
+HANDLER = MessageHandler(host, port)
+print(HANDLER.login("iago").to_json())
 # while True:
 #     if __CLIENT_MANAGER.is_logged():
 #         ui.show_logged_user_menu()

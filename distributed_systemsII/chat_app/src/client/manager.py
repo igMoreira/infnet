@@ -20,22 +20,11 @@ class ClientManager(object):
         """
         try:
             ClientManager.__CONTEXT.connect((host, port))
-            self.id = None
-            self.msgNr = 0
             print('Connected to remote host. You can now start sending messages!')
         except Exception as e:
             print('Unable to connect')
             print(e)
             sys.exit()
-
-
-
-    def is_logged(self):
-        """
-            Verifies if the user is already logged with the server.
-        :return:
-        """
-        return self.id != None
 
 
 
@@ -45,7 +34,7 @@ class ClientManager(object):
         :param payload:
         :return:
         """
-        self.__CONTEXT.sendall(message.encode())
+        self.__CONTEXT.sendall(message.to_json())
 
 
 
@@ -56,13 +45,12 @@ class ClientManager(object):
 
     def make_request(self, request_message):
         response = None
-        if self.is_logged():
-            try:
-                self.__send_message(request_message)
-                response = request_message.build_response(self.__receive_response().decode())
-            except Exception as e:
-                print(e)
-                print('Connection error while sending or receiving request!!!')
+        try:
+            self.__send_message(request_message)
+            response = request_message.build_response(self.__receive_response())
+        except Exception as e:
+            print(e)
+            print('Connection error while sending or receiving request!!!')
         return response
 
     

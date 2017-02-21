@@ -15,7 +15,7 @@ class JsonMessage(object):
         :return:
         """
 
-        return dumps(self.__dict__)
+        return dumps(self.__dict__).encode('utf-8')
 
     @classmethod
     def from_json(cls, payload):
@@ -25,7 +25,7 @@ class JsonMessage(object):
         :return:
         """
         if payload:
-            return cls(**loads(payload))
+            return cls(**loads(payload.decode('utf-8')))
         else:
             raise Exception("Empty payload!")
 
@@ -42,17 +42,6 @@ class Request(object):
 #               Login Messages                #
 ###############################################
 
-class LoginRequest(JsonMessage, Request):
-    """
-        Login Request message.
-    """
-
-    def __init__(self, id=None, msgNr=None):
-        self.cmd = 'login'
-        self.id = id
-        self.msgNr = msgNr
-
-
 class LoginResponse(JsonMessage):
     """
         Login Response message.
@@ -66,6 +55,38 @@ class LoginResponse(JsonMessage):
         self.msgNr = msgNr
         self.data = data
 
+class LoginRequest(JsonMessage, Request):
+    """
+        Login Request message.
+    """
+
+    RESPONSE_CLASS = LoginResponse
+
+    def __init__(self, id=None, msgNr=None):
+        self.cmd = 'login'
+        self.id = id
+        self.msgNr = msgNr
+
 ###############################################
 #         END   Login Messages                #
 ###############################################
+
+class SendResponse(JsonMessage):
+
+    def __init__(self, id, msgNr):
+        self.id=id
+        self.msgNr = msgNr
+
+
+class SendRequest(JsonMessage, Request):
+
+    RESPONSE_CLASS = SendResponse
+
+    def __init__(self, id, msgNr, dst, data):
+        self.cmd = "enviar"
+        self.id = id
+        self.msgNr = msgNr
+        self.dst = dst
+        self.data = data
+
+

@@ -1,6 +1,7 @@
 # Echo server program
 import socket
 import sys
+import json
 
 HOST = 'localhost'               # Symbolic name meaning all available interfaces
 PORT = 8080              # Arbitrary non-privileged port
@@ -29,8 +30,12 @@ print('Server is waiting requests...')
 conn, addr = s.accept()
 # print( 'Connected by ' + addr)
 while True:
-    data = conn.recv(1024)
-    print(data)
-    if not data: break
-    conn.send(data)
+    data = conn.recv(2048).decode('utf-8')
+    if not data: print("Client has disconnected"); break
+
+    data = json.loads(data)
+    print("Received message: %s " % (data,) )
+
+    if data['cmd'] == 'login':
+        conn.send(b'{"id":"test", "msgNr":1, "data":[{"src":"maria", "data":"oi!"}, {"src":"maria", "data":"kd vc?"}]}')
 conn.close()
