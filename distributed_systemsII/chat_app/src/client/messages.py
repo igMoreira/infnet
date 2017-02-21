@@ -90,3 +90,21 @@ class SendRequest(JsonMessage, Request):
         self.data = data
 
 
+class ReceiveResponse(JsonMessage):
+
+    def __init__(self, id, msgNr, data):
+        self.id = id
+        self.msgNr = msgNr
+        self.data = data
+
+
+class ReceiveRequest(JsonMessage, Request):
+
+    RESPONSE_CLASS = ReceiveResponse
+
+    def __init__(self, id, msgNr):
+        self.cmd = "receber"
+        self.id = id
+        self.msgNr = msgNr
+
+

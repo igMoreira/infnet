@@ -38,3 +38,18 @@ class MessageHandler(object):
             else:
                 print('The data to be sent cannot be empty!')
         return response
+
+
+    def receive(self):
+        response = None
+        if not self.__id:
+            print('You have to be logged in to send messages!')
+        else:
+            request = messages.ReceiveRequest(id=self.__id, msgNr=MessageHandler.__msgNr)
+            response = self.__client_manager.make_request(request)
+            if response:
+                MessageHandler.__msgNr = response.msgNr
+        return response
+
+
+    def logout(self):

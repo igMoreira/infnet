@@ -40,4 +40,6 @@ while True:
         conn.send(b'{"id":"test", "msgNr":1, "data":[{"src":"maria", "data":"oi!"}, {"src":"maria", "data":"kd vc?"}]}')
     if data['cmd'] == 'enviar':
         conn.send(b'{"id":"0", "msgNr":27}')
+    if data['cmd'] == 'receber':
+        conn.send(b'{"id": "0","msgNr": 28,"data": [{"src":"maria","data":"oi!"},{"src":"maria","data":"kd vc?"}]}')
 conn.close()
