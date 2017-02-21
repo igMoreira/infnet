@@ -50,6 +50,3 @@ class MessageHandler(object):
             if response:
                 MessageHandler.__msgNr = response.msgNr
         return response
-
-
-    def logout(self):
