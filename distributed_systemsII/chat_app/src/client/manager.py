@@ -22,6 +22,7 @@ class ClientManager(object):
             ClientManager.__CONTEXT.connect((host, port))
             self.id = None
             self.msgNr = 0
+            print('Connected to remote host. You can now start sending messages!')
         except Exception as e:
             print('Unable to connect')
             print(e)
@@ -44,16 +45,24 @@ class ClientManager(object):
         :param payload:
         :return:
         """
-        return None
+        self.__CONTEXT.sendall(message.encode())
 
 
 
     def __receive_response(self):
-        return None
+        return self.__CONTEXT.recv(2048)
 
 
 
     def make_request(self, request_message):
-        self.__send_message(request_message)
-        response = request_message.build_response(self.__receive_response())
+        response = None
+        if self.is_logged():
+            try:
+                self.__send_message(request_message)
+                response = request_message.build_response(self.__receive_response().decode())
+            except Exception as e:
+                print(e)
+                print('Connection error while sending or receiving request!!!')
         return response
+
+    
