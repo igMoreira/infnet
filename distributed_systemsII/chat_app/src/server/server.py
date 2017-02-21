@@ -38,4 +38,6 @@ while True:
 
     if data['cmd'] == 'login':
         conn.send(b'{"id":"test", "msgNr":1, "data":[{"src":"maria", "data":"oi!"}, {"src":"maria", "data":"kd vc?"}]}')
+    if data['cmd'] == 'enviar':
+        conn.send(b'{"id":"0", "msgNr":27}')
 conn.close()
