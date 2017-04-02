@@ -48,13 +48,12 @@ class LoginResponse(JsonMessage):
         Login Response message.
     """
 
-    def __init__(self, id=None, msgNr=None, ack=None, data=None):
+    def __init__(self, id=None, msgNr=None, data=None):
         """
             Constructor
         """
         self.id = id
         self.msgNr = msgNr
-        self.ack = ack
         self.data = data
 
 class LoginRequest(JsonMessage, Request):
@@ -75,19 +74,20 @@ class LoginRequest(JsonMessage, Request):
 
 class SendResponse(JsonMessage):
 
-    def __init__(self, id=None, msgNr=None, ack=None):
+    def __init__(self, id=None, msgNr=None, data=None):
         self.id=id
         self.msgNr = msgNr
+
 
 
 class SendRequest(JsonMessage, Request):
 
     RESPONSE_CLASS = SendResponse
 
-    def __init__(self, id, msgNr, dst, data):
+    def __init__(self, id, dst, data, msgNr=0):
         self.cmd = "enviar"
         self.id = id
-        self.msgNr = 0
+        self.msgNr = msgNr
         self.dst = dst
         self.data = data
 
@@ -97,7 +97,6 @@ class ReceiveResponse(JsonMessage):
     def __init__(self, id=None, msgNr=None, ack=None, data=None):
         self.id = id
         self.msgNr = msgNr
-        self.ack = ack
         self.data = data
 
 
@@ -105,9 +104,9 @@ class ReceiveRequest(JsonMessage, Request):
 
     RESPONSE_CLASS = ReceiveResponse
 
-    def __init__(self, id, msgNr):
+    def __init__(self, id, msgNr=0):
         self.cmd = "receber"
         self.id = id
-        self.msgNr = 0
+        self.msgNr = msgNr
 
 
