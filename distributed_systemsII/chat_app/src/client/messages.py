@@ -15,7 +15,7 @@ class JsonMessage(object):
         :return:
         """
 
-        return dumps(self.__dict__).encode('utf-8')
+        return (dumps(self.__dict__) + '\n').encode('utf-8')
 
     @classmethod
     def from_json(cls, payload):
@@ -25,6 +25,7 @@ class JsonMessage(object):
         :return:
         """
         if payload:
+            print(payload)
             return cls(**loads(payload.decode('utf-8')))
         else:
             raise Exception("Empty payload!")
@@ -47,12 +48,13 @@ class LoginResponse(JsonMessage):
         Login Response message.
     """
 
-    def __init__(self, id=None, msgNr=None, data=None):
+    def __init__(self, id=None, msgNr=None, ack=None, data=None):
         """
             Constructor
         """
         self.id = id
         self.msgNr = msgNr
+        self.ack = ack
         self.data = data
 
 class LoginRequest(JsonMessage, Request):
@@ -65,7 +67,7 @@ class LoginRequest(JsonMessage, Request):
     def __init__(self, id=None, msgNr=None):
         self.cmd = 'login'
         self.id = id
-        self.msgNr = msgNr
+        self.msgNr = 0
 
 ###############################################
 #         END   Login Messages                #
@@ -73,7 +75,7 @@ class LoginRequest(JsonMessage, Request):
 
 class SendResponse(JsonMessage):
 
-    def __init__(self, id, msgNr):
+    def __init__(self, id=None, msgNr=None, ack=None):
         self.id=id
         self.msgNr = msgNr
 
@@ -85,16 +87,17 @@ class SendRequest(JsonMessage, Request):
     def __init__(self, id, msgNr, dst, data):
         self.cmd = "enviar"
         self.id = id
-        self.msgNr = msgNr
+        self.msgNr = 0
         self.dst = dst
         self.data = data
 
 
 class ReceiveResponse(JsonMessage):
 
-    def __init__(self, id, msgNr, data):
+    def __init__(self, id=None, msgNr=None, ack=None, data=None):
         self.id = id
         self.msgNr = msgNr
+        self.ack = ack
         self.data = data
 
 
@@ -105,6 +108,6 @@ class ReceiveRequest(JsonMessage, Request):
     def __init__(self, id, msgNr):
         self.cmd = "receber"
         self.id = id
-        self.msgNr = msgNr
+        self.msgNr = 0
 
 

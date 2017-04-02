@@ -1,7 +1,7 @@
 from message_handler import MessageHandler
 import presentation as ui
 
-host = 'localhost'
+host = '127.0.0.1'
 port = 8080
 
 HANDLER = MessageHandler(host, port)
