@@ -18,7 +18,7 @@ for res in socket.getaddrinfo(HOST, PORT, socket.AF_UNSPEC,
         continue
     try:
         s.bind(sa)
-        s.listen(1)
+        s.listen(5)
     except socket.error as msg:
         s.close()
         s = None
@@ -32,6 +32,4 @@ print('Server is waiting requests...')
 
 while True:
     conn, addr = s.accept()
-    threading.Thread(target=message_handler.handle, args=(conn,)).run()
-
-conn.close()
+    threading._start_new_thread(message_handler.handle, (conn,))
