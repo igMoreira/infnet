@@ -25,7 +25,7 @@ class JsonMessage(object):
         :return:
         """
         if payload:
-            print(payload)
+            # print(payload)
             return cls(**loads(payload.decode('utf-8')))
         else:
             raise Exception("Empty payload!")

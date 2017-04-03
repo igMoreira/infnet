@@ -18,50 +18,11 @@ _LOGGING_IN = 1
 _RUNNING = 2
 _LOGOFF = 3
 
+_SERVER_ID = '0'
 _SPINNER = itertools.cycle(['⠋','⠙','⠹','⠸','⠼','⠴','⠦','⠧','⠇','⠏'])
 
 print('trying to connect to {0}:{1}'.format(sys.argv[1], sys.argv[2]))
 _MESSAGE_HANDLER = MessageHandler(sys.argv[1], int(sys.argv[2]))
-
-def login(usr, num):
-    time.sleep(2)
-    return {
-        "id": "0",
-        "msgNr": 54,
-        "data": [
-            {
-                "src": "maria",
-                "data": "oi!"
-            },
-            {
-                "src": "maria",
-                "data": "kd vc?"
-            }
-        ]
-    }
-
-def send(usr, num, recvr, msg):
-    return {
-        "id": "0",
-        "msgNr": num + 1
-    }
-
-def get(usr, num):
-
-    return {
-        "id": "0",
-        "msgNr": num + 1,
-        "data": [
-            {
-                "src": "maria",
-                "data": "oi {0}!".format(usr) 
-            },
-            {
-                "src": "maria",
-                "data": "kd vc?"
-            }
-        ]
-    }
 
 class Screen():
 
@@ -104,9 +65,12 @@ class Presentation(Thread):
     def print_line(self, messages):
         print('')
         for m in messages:
-            line = '[ {0} ] {3}{1}{4} >> {2}'.format(
+            src = m['src']
+            if src == _SERVER_ID:
+                src = 'server'
+            line = '[ {0} ] {3}{1}{4} says: {2}'.format(
                 datetime.now().strftime('%H:%M:%S'),
-                m['src'],
+                src,
                 m['data'],
                 bcolors.OKGREEN,
                 bcolors.ENDC
@@ -180,7 +144,8 @@ class Presentation(Thread):
 
                 if cmd == 'send' and len(sptd) > 1:
                     data = sptd[1]
-                    resp = _MESSAGE_HANDLER.send(data=data)
+                    dst = sptd[2] if len(sptd) > 2 else _SERVER_ID
+                    resp = _MESSAGE_HANDLER.send(data=data, dst=dst)
                     # self.handle_response(resp)
                     if resp:
                         print(':: {0}sys{1}: message sent'.format(
