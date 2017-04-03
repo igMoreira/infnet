@@ -30,6 +30,8 @@ if s is None:
 
 print('Server is waiting requests...')
 
+
+
 while True:
     conn, addr = s.accept()
     data = conn.recv(2048).decode('utf-8')
