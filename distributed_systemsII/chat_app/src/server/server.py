@@ -31,5 +31,8 @@ if s is None:
 print('Server is waiting requests...')
 
 while True:
-    conn, addr = s.accept()
-    threading._start_new_thread(message_handler.handle, (conn,))
+    try:
+        conn, addr = s.accept()
+        threading._start_new_thread(message_handler.handle, (conn,))
+    except:
+        break
