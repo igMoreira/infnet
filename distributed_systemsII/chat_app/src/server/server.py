@@ -1,9 +1,11 @@
 # Echo server program
 import socket
 import sys
-import json
+import threading
 
-HOST = ''               # Symbolic name meaning all available interfaces
+import message_handler
+
+HOST = 'localhost'               # Symbolic name meaning all available interfaces
 PORT = 8080              # Arbitrary non-privileged port
 s = None
 for res in socket.getaddrinfo(HOST, PORT, socket.AF_UNSPEC,
@@ -27,19 +29,10 @@ if s is None:
     sys.exit(1)
 
 print('Server is waiting requests...')
-conn, addr = s.accept()
-# print( 'Connected by ' + addr)
+
 while True:
+    conn, addr = s.accept()
     data = conn.recv(2048).decode('utf-8')
-    if not data: print("Client has disconnected"); break
+    threading.Thread(target=message_handler.handle, args=(data, conn.send,)).run()
 
-    data = json.loads(data)
-    print("Received message: %s " % (data,) )
-
-    if data['cmd'] == 'login':
-        conn.send(b'{"id":"test", "msgNr":1, "data":[{"src":"maria", "data":"oi!"}, {"src":"maria", "data":"kd vc?"}]}')
-    if data['cmd'] == 'enviar':
-        conn.send(b'{"id":"0", "msgNr":27}')
-    if data['cmd'] == 'receber':
-        conn.send(b'{"id": "0","msgNr": 28,"data": [{"src":"maria","data":"oi!"},{"src":"maria","data":"kd vc?"}]}')
 conn.close()
