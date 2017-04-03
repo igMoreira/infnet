@@ -15,7 +15,7 @@ def login(request):
 
 
 def send(request):
-    id = request['id']; msgNr = request['msgNr']; dst = request['dest']; data = request['data']
+    id = request['id']; msgNr = request['msgNr']; dst = request['dst']; data = request['data']
 
     if not dst in __connected_clients:
         __connected_clients[dst] = []
@@ -27,19 +27,25 @@ def send(request):
 def receive(request):
     pass
 
-def handle(request, callback):
-    request = json.loads(request)
-    print("[%s][%s] - Received request : %s" % (datetime.now().strftime('%d/%m/%Y:%H:%M:%S'), request['cmd'], request))
+def handle(conn):
+    while True:
+        request = conn.recv(2048).decode('utf-8')
 
-    if request['cmd'] == 'login':
-        response = login(request)
-    if request['cmd'] == 'enviar':
-        response = send(request)
-    if request['cmd'] == 'receber':
-        response = receive(request)
+        if request:
+            request = json.loads(request)
 
-    t = threading.Thread(target=callback, args=(response,))
-    print("[%s][%s] - Sending response : %s" % (datetime.now().strftime('%d/%m/%Y:%H:%M:%S'), request['cmd'], response.decode('utf-8')))
-    t.start()
+            print("[%s][%s] - Received request : %s" % (datetime.now().strftime('%d/%m/%Y:%H:%M:%S'), request['cmd'], request))
 
+            if request['cmd'] == 'login':
+                response = login(request)
+            if request['cmd'] == 'enviar':
+                response = send(request)
+            if request['cmd'] == 'receber':
+                response = receive(request)
 
+            print("[%s][%s] - Sending response : %s" % (datetime.now().strftime('%d/%m/%Y:%H:%M:%S'), request['cmd'], response.decode('utf-8')))
+            conn.send(response)
+        else:
+            print("[%s][%s] : %s" % (datetime.now().strftime('%d/%m/%Y:%H:%M:%S'), 'logoff', 'Client has disconnected'))
+            conn.close()
+            break

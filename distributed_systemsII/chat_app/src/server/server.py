@@ -30,11 +30,8 @@ if s is None:
 
 print('Server is waiting requests...')
 
-
-
 while True:
     conn, addr = s.accept()
-    data = conn.recv(2048).decode('utf-8')
-    threading.Thread(target=message_handler.handle, args=(data, conn.send,)).run()
+    threading.Thread(target=message_handler.handle, args=(conn,)).run()
 
 conn.close()
