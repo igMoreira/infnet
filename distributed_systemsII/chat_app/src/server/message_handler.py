@@ -1,5 +1,6 @@
 import json
 import threading
+from datetime import datetime
 
 __connected_clients = {}
 
@@ -13,14 +14,21 @@ def login(request):
     return json.dumps(response).encode('utf-8')
 
 
-def handle(data, callback):
-    data = json.loads(data)
-    print("Received message: %s " % (data,) )
+def send(request):
+    pass
 
-    if data['cmd'] == 'login':
-        t = threading.Thread(target=callback, args=(login(data),))
-    if data['cmd'] == 'enviar':
+
+def handle(request, callback):
+    request = json.loads(request)
+    print("[%s][%s] - Received request : %s" % (datetime.now().strftime('%d/%m/%Y:%H:%M:%S'), request['cmd'], request))
+
+    if request['cmd'] == 'login':
+        response = login(request)
+        t = threading.Thread(target=callback, args=(response,))
+    if request['cmd'] == 'enviar':
         t = threading.Thread(target=callback, args=(b'{"id":"0", "msgNr":27}',))
-    if data['cmd'] == 'receber':
+    if request['cmd'] == 'receber':
         t = threading.Thread(target=callback, args=(b'{"id": "0","msgNr": 28,"data": [{"src":"maria","data":"oi!"},{"src":"maria","data":"kd vc?"}]}',))
+
+    print("[%s][%s] - Sending response : %s" % (datetime.now().strftime('%d/%m/%Y:%H:%M:%S'), request['cmd'], response.decode('utf-8')))
     t.start()
