@@ -11,7 +11,7 @@ def login(request):
     else:
         data = __connected_clients[id] = []
     response = {'id':0, 'msgNr':(msgNr+1), 'data':data}
-    return json.dumps(response).encode('utf-8')
+    return (json.dumps(response) + '\n' ).encode('utf-8')
 
 
 def send(request):
@@ -21,11 +21,15 @@ def send(request):
         __connected_clients[dst] = []
     __connected_clients[dst].append({'src':id, 'data':data})
     response = {'id': 0, 'msgNr': (msgNr + 1)}
-    return json.dumps(response).encode('utf-8')
+    return (json.dumps(response) + '\n').encode('utf-8')
 
 
 def receive(request):
-    pass
+    id = request['id']; msgNr = request['msgNr']
+    data = __connected_clients.get(id, [])
+    response = {'id': 0, 'msgNr': (msgNr + 1), 'data': data}
+    return (json.dumps(response) + '\n').encode('utf-8')
+
 
 def handle(conn):
     while True:
@@ -34,7 +38,7 @@ def handle(conn):
         if request:
             request = json.loads(request)
 
-            print("[%s][%s] - Received request : %s" % (datetime.now().strftime('%d/%m/%Y:%H:%M:%S'), request['cmd'], request))
+            print("[%s][%6s] - Received request : %s" % (datetime.now().strftime('%d/%m/%Y:%H:%M:%S'), request['cmd'], request))
 
             if request['cmd'] == 'login':
                 response = login(request)
@@ -43,9 +47,9 @@ def handle(conn):
             if request['cmd'] == 'receber':
                 response = receive(request)
 
-            print("[%s][%s] - Sending response : %s" % (datetime.now().strftime('%d/%m/%Y:%H:%M:%S'), request['cmd'], response.decode('utf-8')))
+            print("[%s][%6s] - Sending response : %s" % (datetime.now().strftime('%d/%m/%Y:%H:%M:%S'), request['cmd'], response.decode('utf-8')))
             conn.send(response)
         else:
-            print("[%s][%s] : %s" % (datetime.now().strftime('%d/%m/%Y:%H:%M:%S'), 'logoff', 'Client has disconnected'))
+            print("[%s][%6s] : %s" % (datetime.now().strftime('%d/%m/%Y:%H:%M:%S'), 'logoff', 'Client has disconnected'))
             conn.close()
             break
