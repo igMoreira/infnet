@@ -17,6 +17,7 @@ for res in socket.getaddrinfo(HOST, PORT, socket.AF_UNSPEC,
         s = None
         continue
     try:
+        s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         s.bind(sa)
         s.listen(5)
     except socket.error as msg:
@@ -35,4 +36,5 @@ while True:
         conn, addr = s.accept()
         threading._start_new_thread(message_handler.handle, (conn,))
     except:
+        print('Stopping server')
         break
