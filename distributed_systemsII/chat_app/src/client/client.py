@@ -153,6 +153,11 @@ class Presentation(Thread):
                                 bcolors.ENDC
                             )
                         )
+                        
+                        resp = _MESSAGE_HANDLER.receive()
+                        if resp:
+                            self.handle_response(resp)
+                        
                 elif cmd == 'get':
                     resp = _MESSAGE_HANDLER.receive()
                     # print(resp)
