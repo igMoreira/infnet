@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_personalinfo"
+        android:icon="@drawable/ic_person"
+        android:title="@string/menu_personalinfo_label"
+        />
+
+    <item
+        android:id="@+id/nav_education"
+        android:icon="@drawable/ic_formation"
+        android:title="@string/menu_formation_label"
+        />
+
+    <item
+        android:id="@+id/nav_experience"
+        android:icon="@drawable/ic_experience"
+        android:title="@string/menu_experience_label"
+        />
+
+    <item
+        android:id="@+id/nav_courses"
+        android:icon="@drawable/ic_course"
+        android:title="@string/menu_course_label"
+        />
+
+    <item
+        android:id="@+id/nav_publications"
+        android:icon="@drawable/ic_menu_share"
+        android:title="@string/menu_publication_label"
+        />
+
+</menu>

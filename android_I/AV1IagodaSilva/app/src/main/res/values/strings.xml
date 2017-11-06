@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">AV1 Iago da Silva</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="navbar_title_main">Iago Moreira da Silva</string>
+    <string name="navbar_subtitle_main">iago.silva@al.infnet.edu.br</string>
+    <string name="name_register_hint">Digite seu nome</string>
+    <string name="address_register_hint">Digite seu endereço</string>
+    <string name="state_register_hint">Digite seu estado</string>
+    <string name="city_register_hint">Digite sua cidade</string>
+    <string name="phone_register_hint">Digite seu telefone</string>
+    <string name="email_register_hint">Digite seu email</string>
+    <string name="next_button_text">Next</string>
+    <string name="name_label">Nome</string>
+    <string name="address_label">Endereço</string>
+    <string name="state_label">Estado</string>
+    <string name="city_label">Cidade</string>
+    <string name="phone_label">Telefone</string>
+    <string name="email_label">Email</string>
+    <string name="menu_personalinfo_label">Informações Pessoais</string>
+    <string name="menu_formation_label">Formação</string>
+    <string name="menu_experience_label">Experiência Profissional</string>
+    <string name="menu_course_label">Cursos</string>
+    <string name="menu_publication_label">Publicações</string>
+</resources>
