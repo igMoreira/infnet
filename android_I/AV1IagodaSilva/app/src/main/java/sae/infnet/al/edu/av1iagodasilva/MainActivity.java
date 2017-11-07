@@ -14,9 +14,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import sae.infnet.al.edu.av1iagodasilva.activities.courses.CourseShowActivity;
 import sae.infnet.al.edu.av1iagodasilva.activities.education.EducationShowActivity;
+import sae.infnet.al.edu.av1iagodasilva.activities.experience.ExperienceShowActivity;
 import sae.infnet.al.edu.av1iagodasilva.activities.personalInfo.PersonalInfoRegisterActivity;
 import sae.infnet.al.edu.av1iagodasilva.activities.personalInfo.PersonalInfoShowActivity;
+import sae.infnet.al.edu.av1iagodasilva.activities.publications.PublicationShowActivity;
 import sae.infnet.al.edu.av1iagodasilva.model.Curriculum;
 
 public class MainActivity extends AppCompatActivity
@@ -25,7 +28,8 @@ public class MainActivity extends AppCompatActivity
     public static final String CURRICULUM_HEADER = "Curriculum_Header";
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    private static final int CV_REQUEST = 1;
+    public static final int CV_REQUEST = 1;
+    public static final String CV_RESPONSE = "Curriculum_Header_Response";
 
     private static Curriculum CV = new Curriculum();
 
@@ -106,6 +110,21 @@ public class MainActivity extends AppCompatActivity
             intent.putExtra(CURRICULUM_HEADER, CV);
             startActivity(intent);
         }
+        else if ( id == R.id.nav_experience) {
+            Intent intent = new Intent(this, ExperienceShowActivity.class);
+            intent.putExtra(CURRICULUM_HEADER, CV);
+            startActivity(intent);
+        }
+        else if ( id == R.id.nav_courses) {
+            Intent intent = new Intent(this, CourseShowActivity.class);
+            intent.putExtra(CURRICULUM_HEADER, CV);
+            startActivity(intent);
+        }
+        else if ( id == R.id.nav_publications) {
+            Intent intent = new Intent(this, PublicationShowActivity.class);
+            intent.putExtra(CURRICULUM_HEADER, CV);
+            startActivity(intent);
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -119,7 +138,7 @@ public class MainActivity extends AppCompatActivity
         {
             if (resultCode == RESULT_OK)
             {
-                CV = data.getParcelableExtra(PersonalInfoRegisterActivity.CV_PERSONALINFO_RESPONSE);
+                CV = data.getParcelableExtra(MainActivity.CV_RESPONSE);
                 Log.d(TAG, "Curriculum registration complete! ");
                 Log.d(TAG, CV.toString());
             }

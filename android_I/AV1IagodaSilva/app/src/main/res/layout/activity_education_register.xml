@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/vertical_padding"
+    android:paddingLeft="@dimen/horizontal_padding"
+    android:paddingRight="@dimen/horizontal_padding"
+    android:paddingTop="@dimen/vertical_padding"
+    tools:context="sae.infnet.al.edu.av1iagodasilva.activities.education.EducationRegisterActivity">
+
+    <LinearLayout
+        android:id="@+id/education_register_form"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/institution_register_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nome da instituição" />
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/education_register_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="@color/colorPrimary"
+            android:onClick="executeStep"
+            android:text="@string/next_button_text"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
+
+</LinearLayout>

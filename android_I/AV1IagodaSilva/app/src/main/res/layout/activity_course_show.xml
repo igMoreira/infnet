@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/vertical_padding"
     android:paddingLeft="@dimen/horizontal_padding"
     android:paddingRight="@dimen/horizontal_padding"
     android:paddingTop="@dimen/vertical_padding"
-    tools:context="sae.infnet.al.edu.av1iagodasilva.activities.education.EducationShowActivity">
+    tools:context="sae.infnet.al.edu.av1iagodasilva.activities.courses.CourseShowActivity">
 
     <TextView
-        android:id="@+id/education_show_text"
+        android:id="@+id/coursename_show_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/coursedescription_show_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

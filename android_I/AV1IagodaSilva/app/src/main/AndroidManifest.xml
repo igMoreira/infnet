@@ -19,15 +19,43 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activities.personalInfo.PersonalInfoRegisterActivity"
-            android:parentActivityName=".MainActivity" />
+
+        <!--Show Activities-->
         <activity
             android:name=".activities.personalInfo.PersonalInfoShowActivity"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".activities.education.EducationShowActivity"
             android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".activities.experience.ExperienceShowActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".activities.courses.CourseShowActivity"
+            android:parentActivityName=".MainActivity" />
+
+        <activity
+            android:name=".activities.publications.PublicationShowActivity"
+            android:parentActivityName=".MainActivity"></activity>
+
+
+        <!--Register Activities-->
+        <activity
+            android:name=".activities.personalInfo.PersonalInfoRegisterActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".activities.education.EducationRegisterActivity"
+            android:parentActivityName=".activities.personalInfo.PersonalInfoRegisterActivity" />
+        <activity
+            android:name=".activities.experience.ExperienceRegisterActivity"
+            android:parentActivityName=".activities.education.EducationRegisterActivity" />
+        <activity
+            android:name=".activities.courses.CourseRegisterActivity"
+            android:parentActivityName=".activities.experience.ExperienceRegisterActivity" />
+
+        <activity
+            android:name=".activities.publications.PublicationRegisterActivity"
+            android:parentActivityName=".activities.courses.CourseRegisterActivity" />
     </application>
 
 </manifest>
