@@ -22,7 +22,7 @@
             android:id="@+id/institution_register_editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nome da instituição" />
+            android:hint="@string/instname_hint" />
 
     </LinearLayout>
 

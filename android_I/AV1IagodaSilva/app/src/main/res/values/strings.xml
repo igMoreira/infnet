@@ -25,4 +25,16 @@
     <string name="menu_experience_label">Experiência Profissional</string>
     <string name="menu_course_label">Cursos</string>
     <string name="menu_publication_label">Publicações</string>
+    <string name="personal_info_title">Informações pessoais</string>
+    <string name="education_title">Formação</string>
+    <string name="experience_title">Experiência Profissional</string>
+    <string name="course_title">Cursos</string>
+    <string name="publication_title">Publicação</string>
+    <string name="coursename_hint">Nome</string>
+    <string name="courserdesc_hint">Descrição</string>
+    <string name="instname_hint">Nome da instituição</string>
+    <string name="position_hint">Posição</string>
+    <string name="company_hint">Companhia</string>
+    <string name="pubtitle_hint">Título</string>
+    <string name="finish_button_text">Finish</string>
 </resources>

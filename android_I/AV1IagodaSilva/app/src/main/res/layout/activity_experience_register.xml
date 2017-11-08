@@ -22,13 +22,13 @@
             android:id="@+id/position_register_editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Posição" />
+            android:hint="@string/position_hint" />
 
         <EditText
             android:id="@+id/company_register_editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Companhia" />
+            android:hint="@string/company_hint" />
 
     </LinearLayout>
 

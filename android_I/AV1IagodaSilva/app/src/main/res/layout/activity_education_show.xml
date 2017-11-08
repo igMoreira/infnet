@@ -10,9 +10,28 @@
     android:paddingTop="@dimen/vertical_padding"
     tools:context="sae.infnet.al.edu.av1iagodasilva.activities.education.EducationShowActivity">
 
-    <TextView
-        android:id="@+id/education_show_text"
+    <RelativeLayout
+        android:id="@+id/education_show_group"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="@dimen/activity_vertical_margin">
+
+        <TextView
+            android:id="@+id/edu_show_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text="@string/instname_hint" />
+
+        <TextView
+            android:id="@+id/education_show_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edu_show_label"
+            android:textAppearance="?android:textAppearanceMedium" />
+
+    </RelativeLayout>
+
 
 </RelativeLayout>

@@ -47,6 +47,7 @@ public class PersonalInfoRegisterActivity extends CurriculumStepActivity {
 
     @Override
     protected void agregateMessage() {
+        Log.d("IAGO 4", this.cv != null ? "CV not null" : "null");
         PersonalInfo personalInfo = new PersonalInfo();
 
         personalInfo.setName(nameField.getText().toString());

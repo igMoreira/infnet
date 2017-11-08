@@ -14,7 +14,8 @@
     <EditText
         android:id="@+id/publication_register_editText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:hint="@string/pubtitle_hint"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -30,7 +31,7 @@
             android:layout_alignParentRight="true"
             android:background="@color/colorPrimary"
             android:onClick="executeStep"
-            android:text="@string/next_button_text"
+            android:text="@string/finish_button_text"
             android:textColor="@android:color/white" />
     </RelativeLayout>
 

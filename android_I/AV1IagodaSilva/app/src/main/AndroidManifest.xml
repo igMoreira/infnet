@@ -23,38 +23,53 @@
         <!--Show Activities-->
         <activity
             android:name=".activities.personalInfo.PersonalInfoShowActivity"
+            android:label="@string/personal_info_title"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".activities.education.EducationShowActivity"
+            android:label="@string/education_title"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".activities.experience.ExperienceShowActivity"
+            android:label="@string/experience_title"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".activities.courses.CourseShowActivity"
+            android:label="@string/course_title"
             android:parentActivityName=".MainActivity" />
 
         <activity
             android:name=".activities.publications.PublicationShowActivity"
-            android:parentActivityName=".MainActivity"></activity>
+            android:label="@string/publication_title"
+            android:parentActivityName=".MainActivity" />
 
 
         <!--Register Activities-->
         <activity
             android:name=".activities.personalInfo.PersonalInfoRegisterActivity"
+            android:label="@string/personal_info_title"
+            android:launchMode="singleTop"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".activities.education.EducationRegisterActivity"
+            android:label="@string/education_title"
+            android:launchMode="singleTop"
             android:parentActivityName=".activities.personalInfo.PersonalInfoRegisterActivity" />
         <activity
             android:name=".activities.experience.ExperienceRegisterActivity"
+            android:label="@string/experience_title"
+            android:launchMode="singleTop"
             android:parentActivityName=".activities.education.EducationRegisterActivity" />
         <activity
             android:name=".activities.courses.CourseRegisterActivity"
+            android:label="@string/course_title"
+            android:launchMode="singleTop"
             android:parentActivityName=".activities.experience.ExperienceRegisterActivity" />
 
         <activity
             android:name=".activities.publications.PublicationRegisterActivity"
+            android:label="@string/publication_title"
+            android:launchMode="singleTop"
             android:parentActivityName=".activities.courses.CourseRegisterActivity" />
     </application>
 

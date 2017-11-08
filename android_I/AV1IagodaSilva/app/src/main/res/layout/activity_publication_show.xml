@@ -10,9 +10,27 @@
     android:paddingTop="@dimen/vertical_padding"
     tools:context="sae.infnet.al.edu.av1iagodasilva.activities.publications.PublicationShowActivity">
 
-    <TextView
-        android:id="@+id/pubdescription_show_text"
+    <RelativeLayout
+        android:id="@+id/pub_show_group"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="@dimen/activity_vertical_margin">
+
+        <TextView
+            android:id="@+id/pub_show_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text="@string/pubtitle_hint" />
+
+        <TextView
+            android:id="@+id/pubdescription_show_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pub_show_label"
+            android:textAppearance="?android:textAppearanceMedium" />
+
+    </RelativeLayout>
 
 </LinearLayout>
