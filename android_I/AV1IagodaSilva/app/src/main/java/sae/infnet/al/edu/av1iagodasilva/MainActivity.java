@@ -21,6 +21,8 @@ import sae.infnet.al.edu.av1iagodasilva.activities.personalInfo.PersonalInfoRegi
 import sae.infnet.al.edu.av1iagodasilva.activities.personalInfo.PersonalInfoShowActivity;
 import sae.infnet.al.edu.av1iagodasilva.activities.publications.PublicationShowActivity;
 import sae.infnet.al.edu.av1iagodasilva.model.Curriculum;
+import sae.infnet.al.edu.av1iagodasilva.persistence.cache.CacheRepository;
+import sae.infnet.al.edu.av1iagodasilva.persistence.db.dao.CurriculumDAO;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -31,7 +33,10 @@ public class MainActivity extends AppCompatActivity
     public static final int CV_REQUEST = 1;
     public static final String CV_RESPONSE = "Curriculum_Header_Response";
 
-    private static Curriculum CV = new Curriculum();
+//    private static Curriculum CV = new Curriculum();
+
+    private CurriculumDAO dao;
+    private CacheRepository cache;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +49,12 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Curriculum cv = cache.restore();
+                Log.d(TAG, "Restored from cache | UID: " + cv.getId());
                 Intent intent = new Intent(MainActivity.this, PersonalInfoRegisterActivity.class);
-                intent.putExtra(CURRICULUM_HEADER, CV);
-                Log.d(TAG, "Starting curriculum registration process...");
+                intent.putExtra(CURRICULUM_HEADER, cv);
+
+                Log.d(TAG, "Starting curriculum registration process... | UID: " + cv.getId());
                 startActivityForResult(intent, CV_REQUEST);
             }
         });
@@ -59,6 +67,9 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        dao = new CurriculumDAO(this);
+        cache = new CacheRepository(this);
     }
 
     @Override
@@ -96,33 +107,36 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        Curriculum cv = cache.restore();
+        Log.d(TAG, "Restored from cache | UID: " + cv.getId());
+
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_personalinfo) {
             // Handle the camera action
             Intent intent = new Intent(this, PersonalInfoShowActivity.class);
-            intent.putExtra(CURRICULUM_HEADER, CV);
+            intent.putExtra(CURRICULUM_HEADER, cv);
             startActivity(intent);
         }
         else if (id == R.id.nav_education){
             Intent intent = new Intent(this, EducationShowActivity.class);
-            intent.putExtra(CURRICULUM_HEADER, CV);
+            intent.putExtra(CURRICULUM_HEADER, cv);
             startActivity(intent);
         }
         else if ( id == R.id.nav_experience) {
             Intent intent = new Intent(this, ExperienceShowActivity.class);
-            intent.putExtra(CURRICULUM_HEADER, CV);
+            intent.putExtra(CURRICULUM_HEADER, cv);
             startActivity(intent);
         }
         else if ( id == R.id.nav_courses) {
             Intent intent = new Intent(this, CourseShowActivity.class);
-            intent.putExtra(CURRICULUM_HEADER, CV);
+            intent.putExtra(CURRICULUM_HEADER, cv);
             startActivity(intent);
         }
         else if ( id == R.id.nav_publications) {
             Intent intent = new Intent(this, PublicationShowActivity.class);
-            intent.putExtra(CURRICULUM_HEADER, CV);
+            intent.putExtra(CURRICULUM_HEADER, cv);
             startActivity(intent);
         }
 
@@ -138,9 +152,13 @@ public class MainActivity extends AppCompatActivity
         {
             if (resultCode == RESULT_OK)
             {
-                CV = data.getParcelableExtra(MainActivity.CV_RESPONSE);
+                Curriculum cv = data.getParcelableExtra(MainActivity.CV_RESPONSE);
                 Log.d(TAG, "Curriculum registration complete! ");
-                Log.d(TAG, CV.toString());
+                Log.d(TAG, cv.toString());
+                dao.upsert(cv);
+                Log.d(TAG, "Saving in DB | UID: " + cv.getId());
+                cache.save(cv);
+                Log.d(TAG, "Saved in Cache | UID: " + cv.getId());
             }
         }
     }

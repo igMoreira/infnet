@@ -3,12 +3,15 @@ package sae.infnet.al.edu.av1iagodasilva.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.UUID;
+
 /**
  * Created by igMoreira on 05/11/17.
  */
 
 public class Curriculum implements Parcelable {
 
+    private String id;
     private PersonalInfo personalInfo;
     private Education education;
     private Experience experience;
@@ -16,14 +19,24 @@ public class Curriculum implements Parcelable {
     private Publication publication;
 
     public Curriculum() {
+        id = UUID.randomUUID().toString();
     }
 
     public Curriculum(Parcel in) {
+        id = in.readString();
         personalInfo = in.readParcelable(PersonalInfo.class.getClassLoader());
         education = in.readParcelable(Education.class.getClassLoader());
         experience = in.readParcelable(Experience.class.getClassLoader());
         course = in.readParcelable(Course.class.getClassLoader());
         publication = in.readParcelable(Publication.class.getClassLoader());
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public PersonalInfo getPersonalInfo() {
@@ -85,6 +98,7 @@ public class Curriculum implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
         dest.writeParcelable(personalInfo, flags);
         dest.writeParcelable(education, flags);
         dest.writeParcelable(experience, flags);

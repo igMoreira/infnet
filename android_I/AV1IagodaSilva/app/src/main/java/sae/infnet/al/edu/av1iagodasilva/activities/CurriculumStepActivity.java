@@ -4,10 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 
 import sae.infnet.al.edu.av1iagodasilva.MainActivity;
-import sae.infnet.al.edu.av1iagodasilva.R;
 import sae.infnet.al.edu.av1iagodasilva.activities.education.EducationRegisterActivity;
 import sae.infnet.al.edu.av1iagodasilva.model.Curriculum;
 
@@ -41,12 +39,9 @@ public abstract class CurriculumStepActivity extends AppCompatActivity {
     }
 
     protected void loadMessage() {
-        Log.d("IAGO 1", this.cv != null ? "CV not null" : "null");
         Intent intent = getIntent();
         Curriculum receivedCv = intent.getParcelableExtra(MainActivity.CURRICULUM_HEADER);
-        Log.d("IAGO 2", receivedCv != null ? "received not null" : "null");
         this.cv = (receivedCv != null ) ? receivedCv : this.cv;
-        Log.d("IAGO 3", this.cv != null ? "CV NOT null" : "null");
     }
 
     protected void nextStep(Class<EducationRegisterActivity> nextStep) {
