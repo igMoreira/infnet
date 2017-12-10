@@ -27,6 +27,7 @@ import sae.infnet.al.edu.av1iagodasilva.activities.publications.PublicationShowA
 import sae.infnet.al.edu.av1iagodasilva.model.Curriculum;
 import sae.infnet.al.edu.av1iagodasilva.persistence.cache.CacheRepository;
 import sae.infnet.al.edu.av1iagodasilva.persistence.db.dao.CurriculumDAO;
+import sae.infnet.al.edu.av1iagodasilva.workers.DbWorker;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity
     public static final int CV_REQUEST = 1;
     public static final String CV_RESPONSE = "Curriculum_Header_Response";
 
-    private CurriculumDAO dao;
+    private DbWorker dbWorker;
     private CacheRepository cache;
 
     @Override
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        dao = new CurriculumDAO(this);
+        dbWorker = new DbWorker(new CurriculumDAO(this));
         cache = new CacheRepository(this);
     }
 
@@ -164,8 +165,7 @@ public class MainActivity extends AppCompatActivity
                 Curriculum cv = data.getParcelableExtra(MainActivity.CV_RESPONSE);
                 Log.d(TAG, "Curriculum registration complete! ");
                 Log.d(TAG, cv.toString());
-                dao.upsert(cv);
-                Log.d(TAG, "Saving in DB | UID: " + cv.getId());
+                dbWorker.execute(cv);
                 cache.save(cv);
                 Log.d(TAG, "Saved in Cache | UID: " + cv.getId());
             }
