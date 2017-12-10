@@ -37,4 +37,6 @@
     <string name="company_hint">Companhia</string>
     <string name="pubtitle_hint">Título</string>
     <string name="finish_button_text">Finish</string>
+    <!--<string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>-->
+    <string name="banner_ad_unit_id">ca-app-pub-4081206471811096/1916916287</string>
 </resources>

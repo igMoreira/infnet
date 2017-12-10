@@ -14,6 +14,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import sae.infnet.al.edu.av1iagodasilva.activities.courses.CourseShowActivity;
 import sae.infnet.al.edu.av1iagodasilva.activities.education.EducationShowActivity;
 import sae.infnet.al.edu.av1iagodasilva.activities.experience.ExperienceShowActivity;
@@ -26,6 +30,8 @@ import sae.infnet.al.edu.av1iagodasilva.persistence.db.dao.CurriculumDAO;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private AdView mAdView;
 
     public static final String CURRICULUM_HEADER = "Curriculum_Header";
 
@@ -44,6 +50,11 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        MobileAds.initialize(this, "ca-app-pub-4081206471811096~1501983319");
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
