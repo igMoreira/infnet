@@ -39,8 +39,6 @@ public class MainActivity extends AppCompatActivity
     public static final int CV_REQUEST = 1;
     public static final String CV_RESPONSE = "Curriculum_Header_Response";
 
-//    private static Curriculum CV = new Curriculum();
-
     private CurriculumDAO dao;
     private CacheRepository cache;
 
